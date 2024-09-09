@@ -1,186 +1,143 @@
-const url = "https://docs.google.com/spreadsheets/d/1yCZdWdn9YlYoGeqtV-QrzT9d75_ewKfjezN7e5TEQ2w/gviz/tq?";  //url to google sheet of membership data
-const firsts = document.getElementById("firsts");
-const last = document.getElementById("last");
-const id = document.getElementById("id");
-const memnum = document.getElementById("memnum");
-const showButtn = document.getElementById("showButtn");
-const nationality = document.getElementById("nationality");
-const major = document.getElementById("major");
-const college = document.getElementById("college");
-const nextButtn = document.getElementById("nextButtn");
-const prevButtn = document.getElementById("prevButtn");
-const saveButtn = document.getElementById("saveButtn");
+const url =
+  "https://docs.google.com/spreadsheets/d/1yCZdWdn9YlYoGeqtV-QrzT9d75_ewKfjezN7e5TEQ2w/gviz/tq?";
 
+const firstNameElement = document.getElementById("firstName");
+const lastNameElement = document.getElementById("lastName");
+const memberIdElement = document.getElementById("memberId");
+const memberNumberElement = document.getElementById("memberNumber");
+const showButton = document.getElementById("showButton");
+const nationalityElement = document.getElementById("nationalityText");
+const majorElement = document.getElementById("majorText");
+const collegeElement = document.getElementById("collegeAbbr");
+const nextButton = document.getElementById("nextButton");
+const prevButton = document.getElementById("prevButton");
+const saveButton = document.getElementById("saveButton");
 
-var searchID = document.getElementById("search_id").value;  //for search bar
+let searchID = document.getElementById("searchInput").value;
 
-
-/*
-This part of code generates a Canvas element and append it to the <div id="capture">.
-The reason we need to do this is to allow us to be able to download the image, because we cannot download what is in
-<div> as an image, but we can do that with <canvas>.
-*/
-html2canvas(document.querySelector("#capture")).then(canvas => { 
-    document.body.appendChild(canvas);
+html2canvas(document.querySelector("#cardContainer")).then((canvas) => {
+  document.body.appendChild(canvas);
 });
 
-saveButtn.addEventListener("click", function(){  //save button  --> for downloading the card from <canvas> we created just above.
-    const canvas = document.querySelector("canvas");
-    let urii = canvas.toDataURL();
-    var link = document.createElement('a');
-    link.href = urii;
-    let file_name = "";
-    file_name += "member_" + searchID.toString() + ".png";
-    link.download = file_name;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-})
-
-showButtn.addEventListener("click", function(){  //show button
-    searchID = document.getElementById("search_id").value;
-    generate();
+saveButton.addEventListener("click", function () {
+  const canvas = document.querySelector("canvas");
+  let imageURI = canvas.toDataURL();
+  let link = document.createElement("a");
+  link.href = imageURI;
+  let fileName = `member_${searchID}.png`;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 });
 
-function generate (){
-    let zero = searchID.toString();
-    zero = 5 - zero.length;
-    let oh = '0';
-    console.log("its  : "+searchID);
+showButton.addEventListener("click", function () {
+  searchID = document.getElementById("searchInput").value;
+  generateCard();
+});
 
-    //getting data from the google sheet
-    fetch(url)   
-    .then(res => res.text())
-    .then(rep => {
-        const data = JSON.parse(rep.substr(47).slice(0,-2));  //don't worry about this, this is for dealing with the return response from google sheet
-        let dataa = data.table.rows;
-        for(let y in dataa){ //iterating through info, e.g., student ID, major, first_name, ...
-            //console.log(y, dataa[y]);
+function generateCard() {
+  let zeroPadding = 5 - searchID.toString().length;
+  let zeros = "0".repeat(zeroPadding);
 
-            if(dataa[y].c[0].v == searchID){  
-                /*
-                same for here, I used 'dataa[y].c[0].v' due to the format of data google sheet return to me 
-                when fetching it ( I have tried prinitng the whole retuned data, so I understand its format)
-                */
-                let info = dataa[y].c;
-                
-                id.innerHTML = info[6].f.trim();
-                
-                //writing data to the element on HTML which will appear on the card
-                memnum.innerHTML = "[ " + oh.repeat(zero) + searchID + " ]";  //serach ID === membership number too
-                
-                let country = info[7].v.trim();
-                let tempArr = country.split(" ");
-                country = "";
-                for(let i=0; i<tempArr.length; i++){
-                    let str = tempArr[i];
-                    if(str.length>=1) str = str[0].toUpperCase() + str.substr(1,str.length-1) + " ";
-                    country += str;
-                }
+  fetch(url)
+    .then((res) => res.text())
+    .then((rep) => {
+      const data = JSON.parse(rep.substr(47).slice(0, -2));
+      let rows = data.table.rows;
 
-                //writing data to the card again
-                nationality.innerHTML = country;
-                
+      for (let row of rows) {
+        if (row.c[0].v == searchID) {
+          let info = row.c;
 
-                /*
-                These lines here are just me dealing with people whose names have so many parts, like 4 or 5.
-                What these lines do is just handling which parts of the name will start to be on the newline.
-                */
-                let allPt = info[2].v.trim();
-                tempArr = allPt.split(" ");
-                let firstPt = ""; 
-                let lastPt;
-                if(tempArr.length>=4){
-                    for(let i=0; i<tempArr.length-2; i++){
-                        let str = tempArr[i];
-                        str.toUpperCase();
-                        firstPt += str + " ";
-                    }
-                    lastPt = tempArr[tempArr.length-2].toUpperCase() + " " + tempArr[tempArr.length-1].toUpperCase();
-                }
-                else if(tempArr.length == 3){
-                    firstPt = tempArr[0] + " " + tempArr[1];
-                    lastPt = tempArr[2];
-                }
-                else if(tempArr.length == 1){
-                    firstPt = tempArr[0];
-                    if(info[2].v.trim().toLowerCase() == "n/a") lastPt = "";
-                    else lastPt = "(" + info[2].v.trim() + ")";
-                }
-                else{
-                    firstPt = tempArr[0];
-                    lastPt = tempArr[1];
-                }
-                firsts.innerHTML = firstPt;
-                last.innerHTML = lastPt;
-                
-                major.innerHTML = info[11].v.toUpperCase();
+          memberIdElement.innerHTML = info[6].f.trim();
+          memberNumberElement.innerHTML = `[ ${zeros}${searchID} ]`;
 
-                let col = findCollege(info[9].v.trim());
-                college.innerHTML = col;
+          let country = info[7].v
+            .trim()
+            .split(" ")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+          nationalityElement.innerHTML = country;
 
-                display();
-                return;
-            }
+          let fullName = info[2].v.trim().split(" ");
+          let firstName = fullName.slice(0, -1).join(" ");
+          let lastName = fullName[fullName.length - 1];
+          firstNameElement.innerHTML = firstName;
+          lastNameElement.innerHTML = lastName;
+
+          majorElement.innerHTML = info[11].v.toUpperCase();
+          collegeElement.innerHTML = mapCollegeName(info[9].v.trim());
+
+          displayCard();
+          return;
         }
-        firsts.innerHTML = "----- Not Found ------";
-        display();
-    })
-}
+      }
 
-function display(){
-    var bog = document.body.querySelector("canvas");
-    document.body.removeChild(bog);
-    html2canvas(document.querySelector("#capture")).then(canvas => {
-        document.body.appendChild(canvas);
+      firstNameElement.innerHTML = "----- Not Found ------";
+      displayCard();
     });
 }
 
-nextButtn.addEventListener("click", function(){
-    if(searchID<22163) searchID = 22163;
-    else searchID++;
-    // else searchID = 22001;
-    generate();
-    //display();
-})
-
-prevButtn.addEventListener("click", function(){
-    if(searchID>=22164) searchID --;
-    generate();
-    //display();
-})
-
-//to map abbreviation of college in the google sheet to full college name
-function findCollege(college){
-    let col = " ";
-    switch(college){
-        case "Lee Woo Sing College":
-            col = "LWS";
-            break;
-        case "Chung Chi College":
-            col = "CC";
-            break;
-        case "United College":
-            col = "UC";
-            break;
-        case "New Asia College":
-            col = "NA";
-            break;
-        case "Shaw College":
-            col = "Shaw";
-            break;
-        case "S.H.Ho College":
-            col = "SH Ho";
-            break;
-        case "Morningside College":
-            col = "MC";
-            break;
-        case "Wu Yee Sun College":
-            col = "WYS";
-            break;
-        case "C.W.Chu College":
-            col = "CW Chu";
-            break;
-    }
-    return col;
+function displayCard() {
+  const canvas = document.querySelector("canvas");
+  document.body.removeChild(canvas);
+  html2canvas(document.querySelector("#cardContainer")).then((canvas) => {
+    document.body.appendChild(canvas);
+  });
 }
+
+nextButton.addEventListener("click", function () {
+  searchID = searchID < 22163 ? 22163 : ++searchID;
+  generateCard();
+});
+
+prevButton.addEventListener("click", function () {
+  if (searchID >= 22164) searchID--;
+  generateCard();
+});
+
+function mapCollegeName(college) {
+  const collegeMap = {
+    "Lee Woo Sing College": "LWS",
+    "Chung Chi College": "CC",
+    "United College": "UC",
+    "New Asia College": "NA",
+    "Shaw College": "Shaw",
+    "S.H.Ho College": "SH Ho",
+    "Morningside College": "MC",
+    "Wu Yee Sun College": "WYS",
+    "C.W.Chu College": "CW Chu",
+  };
+
+  return collegeMap[college] || college;
+}
+
+function generateCardWithInputs(
+  firstName,
+  lastName,
+  memberId,
+  memberNumber,
+  nationality,
+  major,
+  college
+) {
+  firstNameElement.innerHTML = firstName;
+  lastNameElement.innerHTML = lastName;
+  memberIdElement.innerHTML = memberId;
+  memberNumberElement.innerHTML = `[ ${memberNumber} ]`;
+  nationalityElement.innerHTML = nationality;
+  majorElement.innerHTML = major.toUpperCase();
+  collegeElement.innerHTML = mapCollegeName(college);
+  displayCard();
+}
+
+generateCardWithInputs(
+  "Eve",
+  "Suwannuraks, Noppharada (Eve)",
+  "22550",
+  "22550",
+  "Thailand",
+  "IBBA",
+  "S.H.Ho College"
+);

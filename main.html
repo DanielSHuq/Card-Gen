@@ -12,53 +12,53 @@
       rel="stylesheet"
     />
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <title>Document</title>
+    <title>ISA Membership Card</title>
   </head>
   <body>
-    <div id="capture">
+    <div id="cardContainer">
       <img
-        alt="isa-logo"
+        alt="ISA Logo"
         id="logo"
         width="95px"
         height="95px"
-        src="ISA LOGO2.png"
+        src="ISA_LOGO2.png"
       />
-      <div class="text" id="yr">EST. 2008</div>
-      <div class="text" id="asso">INTERNATIONAL STUDENT<br />ASSOCIATION</div>
-      <div class="text" id="mem">ISA MEMBERSHIP CARD</div>
-      <div class="text" id="firsts">name middle</div>
-      <div class="text" id="last">last</div>
-      <div class="text" id="id">1155167890</div>
-      <div class="text" id="college">MC</div>
-      <div class="text" id="nationality">Thailand</div>
-      <div class="text" id="major">CS</div>
-      <div class="seperator" id="sep1"></div>
-      <div class="seperator" id="sep2"></div>
-      <div class="text" id="memnum">[ 12345 ]</div>
-
-      <img id="bg" width="100%" height="100%" src="card_background.png" />
-
-      <div id="fill"></div>
-    </div>
-    <div id="empty">
-      <input
-        title="search_id"
-        label="search_id"
-        alt="search"
-        type="text"
-        id="search_id"
+      <div class="text" id="yearEstablished">EST. 2008</div>
+      <div class="text" id="associationName">
+        INTERNATIONAL STUDENT<br />ASSOCIATION
+      </div>
+      <div class="text" id="cardTitle">ISA MEMBERSHIP CARD</div>
+      <div class="text" id="firstName">First Name</div>
+      <div class="text" id="lastName">Last Name</div>
+      <div class="text" id="memberId">1155167890</div>
+      <div class="text" id="collegeAbbr">MC</div>
+      <div class="text" id="nationalityText">Thailand</div>
+      <div class="text" id="majorText">CS</div>
+      <div class="separator" id="separator1"></div>
+      <div class="separator" id="separator2"></div>
+      <div class="text" id="memberNumber">[ 12345 ]</div>
+      <img
+        alt="card"
+        id="backgroundImage"
+        width="100%"
+        height="100%"
+        src="card_background.png"
       />
-      <button alt="show" id="showButtn" style="background-color: white">
-        show
+      <div id="overlay"></div>
+    </div>
+
+    <div id="controls">
+      <input title="Search by ID" alt="search" type="text" id="searchInput" />
+      <button id="showButton" style="background-color: white">Show</button>
+      <button id="saveButton" style="background-color: aquamarine">Save</button>
+      <button id="nextButton" style="background-color: grey; color: white">
+        Next
       </button>
-      <button id="saveButtn" style="background-color: aquamarine">save</button>
-      <button id="nextButtn" style="background-color: grey; color: white">
-        next
-      </button>
-      <button id="prevButtn" style="background-color: black; color: white">
-        prev
+      <button id="prevButton" style="background-color: black; color: white">
+        Previous
       </button>
     </div>
+
     <script src="index.js"></script>
   </body>
 </html>
