@@ -2,17 +2,17 @@
   "name": "mem-card-gen",
   "version": "1.0.0",
   "description": "isa membership card generator",
-  "main": "testty.html",
+  "main": "main.html",
   "scripts": {
     "start": "npm run lite",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lite": "lite-server -c bs-config.json"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pearlpisut/ISA-card-gen.git"
+    "type": "git"
   },
-  "author": "pearl",
+  "type": "module",
+  "author": "pearl,daniel",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/pearlpisut/ISA-card-gen/issues"
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/pearlpisut/ISA-card-gen#readme",
   "devDependencies": {
     "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
   }
 }
