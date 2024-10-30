@@ -1,14 +1,14 @@
 #cardContainer {
-  height: 590px;
-  width: 1004px;
+  height: 2360px; /* 590px * 4 */
+  width: 4016px; /* 1004px * 4 */
   background-color: white;
-  border-radius: 60px;
+  border-radius: 240px; /* 60px * 4 */
   position: absolute;
-  top: 50px;
+  top: 200px; /* 50px * 4 */
 }
 
 #empty {
-  height: 650px;
+  height: 2600px; /* 650px * 4 */
   z-index: 8;
   position: relative;
 }
@@ -21,126 +21,122 @@
 }
 
 #yearEstablished {
-  top: 32px;
-  left: 125px;
-  font-size: 16px;
+  top: 128px; /* 32px * 4 */
+  left: 500px; /* 125px * 4 */
+  font-size: 64px; /* 16px * 4 */
   font-weight: 400;
-  letter-spacing: 3px;
+  letter-spacing: 12px; /* 3px * 4 */
 }
 
 #associationName {
-  top: 57px;
-  left: 125px;
-  line-height: 25px;
-  font-size: 22px;
-  letter-spacing: 3px;
+  top: 228px; /* 57px * 4 */
+  left: 500px; /* 125px * 4 */
+  line-height: 100px; /* 25px * 4 */
+  font-size: 88px; /* 22px * 4 */
+  letter-spacing: 12px; /* 3px * 4 */
   font-weight: 700;
 }
 
 #bg {
-  /*border-radius: 70px;*/
   z-index: 1;
   position: absolute;
-  /*filter: hue-rotate(300deg) invert(100%);*/
 }
 
 #cardTitle {
-  font-size: 13px;
-  /*writing-mode: vertical-rl;*/
-  left: -30px;
-  top: 305px;
+  font-size: 52px; /* 13px * 4 */
+  left: -120px; /* -30px * 4 */
+  top: 1220px; /* 305px * 4 */
   font-weight: 500;
-  letter-spacing: 2.2px;
-  /*writing-mode: tb-rl;*/
+  letter-spacing: 8.8px; /* 2.2px * 4 */
   transform: rotate(270deg);
 }
 
 #logo {
   z-index: 2;
-  top: 20px;
-  left: 20px;
+  top: 80px; /* 20px * 4 */
+  left: 80px; /* 20px * 4 */
   position: absolute;
 }
 
 #firstName {
-  font-size: 55px;
-  top: 200px;
+  font-size: 220px; /* 55px * 4 */
+  top: 800px; /* 200px * 4 */
   font-weight: 700;
-  left: 90px;
+  left: 360px; /* 90px * 4 */
 }
 
 #lastName {
-  font-size: 55px;
-  top: 260px;
+  font-size: 220px; /* 55px * 4 */
+  top: 1040px; /* 260px * 4 */
   font-weight: 700;
-  left: 90px;
-  letter-spacing: 4px;
+  left: 360px; /* 90px * 4 */
+  letter-spacing: 16px; /* 4px * 4 */
 }
 
-#memberNumber {
-  font-size: 30px;
-  top: 380px;
+#memberId {
+  font-size: 120px; /* 30px * 4 */
+  top: 1520px; /* 380px * 4 */
   font-weight: 700;
-  left: 90px;
-  letter-spacing: 5px;
+  left: 360px; /* 90px * 4 */
+  letter-spacing: 20px; /* 5px * 4 */
 }
 
 #collegeAbbr {
-  font-size: 27px;
-  top: 380px;
+  font-size: 108px; /* 27px * 4 */
+  top: 1520px; /* 380px * 4 */
   font-weight: 700;
-  right: 50px;
-  letter-spacing: 3px;
+  right: 200px; /* 50px * 4 */
+  letter-spacing: 12px; /* 3px * 4 */
 }
 
 #nationalityText {
-  font-size: 27px;
-  top: 413px;
+  font-size: 108px; /* 27px * 4 */
+  top: 1652px; /* 413px * 4 */
   font-weight: 700;
-  right: 50px;
-  letter-spacing: 3px;
+  right: 200px; /* 50px * 4 */
+  letter-spacing: 12px; /* 3px * 4 */
 }
 
 #majorText {
-  font-size: 27px;
-  top: 446px;
+  font-size: 108px; /* 27px * 4 */
+  top: 1784px; /* 446px * 4 */
   font-weight: 700;
-  right: 50px;
-  letter-spacing: 3px;
+  right: 200px; /* 50px * 4 */
+  letter-spacing: 12px; /* 3px * 4 */
 }
 
 .separator {
   position: absolute;
   z-index: 7;
-  height: 6px;
-  width: 100px;
+  height: 24px; /* 6px * 4 */
+  width: 400px; /* 100px * 4 */
   background-color: white;
-  top: 350px;
+  top: 1400px; /* 350px * 4 */
 }
 
 #separator-1 {
-  left: 93px;
+  left: 372px; /* 93px * 4 */
 }
 
 #separator-2 {
-  right: 50px;
+  right: 200px; /* 50px * 4 */
 }
 
-#memberId {
-  font-size: 30px;
-  top: 520px;
+#memberNumber {
+  font-size: 120px; /* 30px * 4 */
+  top: 2080px; /* 520px * 4 */
   font-weight: 700;
-  left: 90px;
-  letter-spacing: 4px;
+  left: 360px; /* 90px * 4 */
+  letter-spacing: 16px; /* 4px * 4 */
   font-style: italic;
 }
 
 input {
-  height: 30px;
-  width: 200px;
+  height: 120px; /* 30px * 4 */
+  width: 800px; /* 200px * 4 */
 }
 
 button {
-  height: 30px;
-  width: 70px;
+  height: 120px; /* 30px * 4 */
+  width: 280px; /* 70px * 4 */
 }
